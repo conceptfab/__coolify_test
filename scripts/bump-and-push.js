@@ -25,12 +25,21 @@ function validateVersion(ver) {
 }
 
 function runGit(args) {
-  const r = spawnSync('git', args, { stdio: 'inherit' });
+  const cmdStr = 'git ' + args.join(' ');
+  console.log('\n> ' + cmdStr);
+  const r = spawnSync('git', args, {
+    encoding: 'utf-8',
+    stdio: ['inherit', 'pipe', 'pipe'],
+  });
+  if (r.stdout) process.stdout.write(r.stdout);
+  if (r.stderr) process.stderr.write(r.stderr);
   if (r.status !== 0) {
+    console.error('BŁĄD: git zakończył się kodem ' + r.status);
     const err = new Error('Git zakończył się błędem');
     err.status = r.status;
     throw err;
   }
+  console.log('OK\n');
 }
 
 async function main() {
@@ -78,10 +87,14 @@ async function main() {
     );
     console.log(`Zaktualizowano wersję: ${currentVersion} → ${version}`);
 
-    runGit(['add', 'package.json']);
+    runGit(['add', '.']);
     runGit(['commit', '-m', message]);
     runGit(['push']);
     console.log('Gotowe: commit i push na GitHub wykonane.');
+    console.log('');
+    console.log(
+      'Wszystkie zmiany są w commicie. Jeśli panel Źródło nadal pokazuje listę – kliknij odśwież (↻) w panelu Source Control.'
+    );
   } catch (err) {
     rl.close();
     if (err.status != null) process.exit(err.status);
