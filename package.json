@@ -1,12 +1,14 @@
 {
-  "name": "coolify-nextjs-stats",
-  "version": "0.1.0",
+  "name": "coolify-test-app",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run lint",
+    "release": "node scripts/bump-and-push.js"
   },
   "dependencies": {
     "next": "14.2.18",
