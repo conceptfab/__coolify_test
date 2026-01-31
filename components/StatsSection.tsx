@@ -138,7 +138,9 @@ export function StatsSection() {
           fontSize: '0.875rem',
         }}
       >
-        API JSON: <a href="/api/stats">/api/stats</a>
+        <a href="/ports">Zajęte porty</a> ·{' '}
+        <a href="/coolify-env">Zmienne Coolify</a> · API JSON:{' '}
+        <a href="/api/stats">/api/stats</a>
       </p>
     </div>
   );

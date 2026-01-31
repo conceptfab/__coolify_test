@@ -1,4 +1,5 @@
 import { StatsSection } from '@/components/StatsSection';
+import { APP_VERSION } from '@/lib/version';
 
 export default function HomePage() {
   return (
@@ -7,7 +8,7 @@ export default function HomePage() {
         Coolify – statystyki
       </h1>
       <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>
-        Przykładowa aplikacja Next.js do testowania hostingu na Coolify
+        v{APP_VERSION} – testowanie hostingu na Coolify
       </p>
       <StatsSection />
     </main>

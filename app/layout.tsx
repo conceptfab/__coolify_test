@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import { APP_VERSION } from '@/lib/version';
+import { TopBar } from '@/components/TopBar';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Coolify – statystyki',
-  description:
-    'Przykładowa aplikacja Next.js do testowania hostingu na Coolify',
+  description: `coolify-test-app v${APP_VERSION} – testowanie hostingu na Coolify`,
 };
 
 export default function RootLayout({
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl">
-      <body>{children}</body>
+      <body>
+        <TopBar />
+        {children}
+      </body>
     </html>
   );
 }
